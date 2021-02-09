@@ -6,9 +6,6 @@
 #include "app.h"
 #include <stdbool.h>
 
-SDL_Window* sdlWindow = NULL;
-SDL_Renderer* sdlRenderer = NULL;
-
 bool app_new(int width, int height) {
     bool success = true;
     //Initialize SDL
@@ -17,7 +14,7 @@ bool app_new(int width, int height) {
         success = false;
     } else {
         //Create window
-        sdlWindow = SDL_CreateWindow("SDL Tutorial", 0, 0, width, height, SDL_WINDOW_SHOWN );
+        sdlWindow = SDL_CreateWindow("SDL Tutorial", 0, 0, width, height, SDL_WINDOW_SHOWN);
         if(sdlWindow == NULL ) {
             printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
             success = false;
@@ -45,28 +42,11 @@ bool app_running(){
 }
 
 
-bool app_draw_square(float x, float y, int width, int height) {
-    SDL_SetRenderDrawColor( sdlRenderer, 255, 255, 255, 255 );
-
-    SDL_Rect r;
-    r.x = (int) x;
-    r.y = (int) y;
-    r.w = width;
-    r.h = height;
-
-    // Render rect
-    SDL_RenderFillRect( sdlRenderer, &r );
-
-    // Render the rect to the screen
-    SDL_RenderPresent(sdlRenderer);
-}
 
 bool app_close() {
     SDL_DestroyWindow( sdlWindow);
-    sdlWindow = NULL;
 
     SDL_DestroyRenderer(sdlRenderer);
-    sdlRenderer = NULL;
 
     //Quit SDL subsystems
     SDL_Quit();

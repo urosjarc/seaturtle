@@ -7,9 +7,12 @@
 #define SEATURTLE_APP_H
 
 #include <stdbool.h>
+#include <SDL.h>
+
+SDL_Window* sdlWindow;
+SDL_Renderer* sdlRenderer;
 
 bool app_new(int width, int height);
-bool app_draw_square(float x, float y, int width, int height);
 bool app_running();
 bool app_close();
 

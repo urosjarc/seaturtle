@@ -1,7 +1,5 @@
-#include "SDL2/SDL.h"
-#include <stdio.h>
-
 #include "app.h"
+#include "draw.h"
 
 
 int main(int argc, char* argv[]) {
@@ -15,7 +13,7 @@ int main(int argc, char* argv[]) {
     while (app_running()) {
 
         for (int i = 0; i < 2; ++i) {
-            app_draw_square(posx[i], posy[i], 10, 10);
+            draw_square(posx[i], posy[i], 10, 10);
             posx[i] += speedx[i];
             posy[i] += speedy[i];
             if(0 > posx[i]) {

@@ -5,6 +5,8 @@
 int main(int argc, char* argv[]) {
 
     app_new(600, 600);
+
+    char* colours[] = {"blue", "red"};
     int posx[2] = {0, 0};
     int posy[2] = {0, 0};
     int speedx[2] = {2, 4};
@@ -13,7 +15,10 @@ int main(int argc, char* argv[]) {
     while (app_running()) {
 
         for (int i = 0; i < 2; ++i) {
+
+            draw_colour(colours[i]);
             draw_square(posx[i], posy[i], 10, 10);
+
             posx[i] += speedx[i];
             posy[i] += speedy[i];
             if(0 > posx[i]) {

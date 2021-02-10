@@ -5,6 +5,7 @@
 int main(int argc, char* argv[]) {
 
     app_new(600, 600);
+    app_background("green");
 
     char* colours[] = {"blue", "red"};
     int posx[2] = {0, 0};

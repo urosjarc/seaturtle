@@ -5,7 +5,9 @@
 #include <SDL.h>
 #include "app.h"
 #include "draw.h"
+#include "utils.h"
 #include <stdbool.h>
+
 
 bool app_new(int width, int height) {
     bool success = true;
@@ -15,13 +17,13 @@ bool app_new(int width, int height) {
         success = false;
     } else {
         //Create window
-        app_window = SDL_CreateWindow("SDL Tutorial", 0, 0, width, height, SDL_WINDOW_SHOWN);
-        if (app_window == NULL) {
+        APP_WINDOW = SDL_CreateWindow("SDL Tutorial", 0, 0, width, height, SDL_WINDOW_SHOWN);
+        if (APP_WINDOW == NULL) {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
             success = false;
         } else {
             //Get window surface
-            app_renderer = SDL_CreateRenderer(app_window, -1, SDL_RENDERER_ACCELERATED);
+            APP_RENDERER = SDL_CreateRenderer(APP_WINDOW, -1, SDL_RENDERER_ACCELERATED);
         }
     }
     app_background("white");
@@ -39,43 +41,20 @@ bool app_running() {
             return false;
         }
     }
-    SDL_SetRenderDrawColor(app_renderer, app_background_colour[0], app_background_colour[1], app_background_colour[2], 255);
-    SDL_RenderClear(app_renderer);
+    SDL_SetRenderDrawColor(APP_RENDERER, APP_BACKGROUND_COLOUR[0], APP_BACKGROUND_COLOUR[1], APP_BACKGROUND_COLOUR[2], 255);
+    SDL_RenderClear(APP_RENDERER);
     app_wait(16);
-    SDL_SetRenderDrawColor(app_renderer, draw_background_colour[0], draw_background_colour[1], draw_background_colour[2], 255);
+    SDL_SetRenderDrawColor(APP_RENDERER, DRAW_COLOUR[0], DRAW_COLOUR[1], DRAW_COLOUR[2], 255);
     return true;
 }
 
 
 void app_background(char *colour) {
-    char *colours[] = {
-            "black", "white", "red", "lime", "blue", "yellow", "cyan", "magenta", "silver", "gray", "maroon", "olive",
-            "green", "purple", "teal", "navy",
-    };
-
-    int colourValues[][3] = {
-            {0,   0,   0},
-            {255, 255, 255},
-            {255, 0,   0},
-            {0,   255, 0},
-            {0,   0,   255},
-            {255, 255, 0},
-            {0,   255, 255},
-            {255, 0,   255},
-            {192, 192, 192},
-            {128, 128, 128},
-            {128, 0,   0},
-            {128, 128, 0},
-            {0,   128, 0},
-            {128, 0,   128},
-            {0,   128, 128},
-            {0,   0,   128}
-    };
-
-    for (int i = 0; i < 16; ++i) {
-        if (strcmp(colour, colours[i]) == 0) {
+    for (int i = 0; i < UTILS_LEN(UTILS_COLOURS); ++i) {
+        Colour colourS = UTILS_COLOURS[i];
+        if (strcmp(colourS.name, colour) == 0) {
             for (int j = 0; j < 3; ++j) {
-                app_background_colour[j] = colourValues[i][j];
+                APP_BACKGROUND_COLOUR[j] = colourS.value[j];
             }
             break;
         }
@@ -84,9 +63,9 @@ void app_background(char *colour) {
 
 
 bool app_close() {
-    SDL_DestroyWindow(app_window);
+    SDL_DestroyWindow(APP_WINDOW);
 
-    SDL_DestroyRenderer(app_renderer);
+    SDL_DestroyRenderer(APP_RENDERER);
 
     //Quit SDL subsystems
     SDL_Quit();

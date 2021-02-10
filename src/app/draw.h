@@ -6,12 +6,13 @@
 #define SMALLSDL_DRAW_H
 
 #include <stdbool.h>
+#include "utils.h"
 
-int draw_background_colour[3];
+static int DRAW_COLOUR[3] = {255, 255, 255};
 
 void draw_colour(char *colour);
 
 void draw_line(float x_start, float y_start, float x_end, float y_end);
-void draw_square(float x, float y, int width, int height);
+void draw_square(float x, float y, float width, float height);
 
 #endif //SMALLSDL_DRAW_H

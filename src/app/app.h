@@ -13,7 +13,7 @@
 
 SDL_Window* APP_WINDOW;
 SDL_Renderer* APP_RENDERER;
-static int APP_BACKGROUND_COLOUR[3] = {0,0,0};
+static Colour APP_BACKGROUND_COLOUR;
 
 bool app_new(int width, int height);
 bool app_running();

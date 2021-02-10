@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "utils.h"
 
-static int DRAW_COLOUR[3] = {255, 255, 255};
+static Colour DRAW_COLOUR;
 
 void draw_colour(char *colour);
 

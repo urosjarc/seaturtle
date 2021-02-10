@@ -1,5 +1,6 @@
 #include "app.h"
 #include "draw.h"
+#include <math.h>
 
 
 int main(int argc, char* argv[]) {
@@ -38,6 +39,10 @@ int main(int argc, char* argv[]) {
                 posy[i] = 600;
                 speedy[i] *= -1;
             }
+        }
+
+        for (int j = -30; j < 30; ++j) {
+            draw_line(0, 300-j*30, 600, 300+j*30);
         }
     }
 

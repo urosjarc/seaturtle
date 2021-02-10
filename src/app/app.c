@@ -32,6 +32,7 @@ bool app_new(int width, int height) {
 }
 
 bool app_running() {
+    SDL_RenderPresent(APP_RENDERER);
 
     // Render the rect to the screen
     SDL_Event event;
@@ -41,21 +42,18 @@ bool app_running() {
             return false;
         }
     }
-    SDL_SetRenderDrawColor(APP_RENDERER, APP_BACKGROUND_COLOUR[0], APP_BACKGROUND_COLOUR[1], APP_BACKGROUND_COLOUR[2], 255);
+    SDL_SetRenderDrawColor(APP_RENDERER, APP_BACKGROUND_COLOUR.value[0], APP_BACKGROUND_COLOUR.value[1], APP_BACKGROUND_COLOUR.value[2], 255);
     SDL_RenderClear(APP_RENDERER);
     app_wait(16);
-    SDL_SetRenderDrawColor(APP_RENDERER, DRAW_COLOUR[0], DRAW_COLOUR[1], DRAW_COLOUR[2], 255);
+    SDL_SetRenderDrawColor(APP_RENDERER, DRAW_COLOUR.value[0], DRAW_COLOUR.value[1], DRAW_COLOUR.value[2], 255);
     return true;
 }
-
 
 void app_background(char *colour) {
     for (int i = 0; i < UTILS_LEN(UTILS_COLOURS); ++i) {
         Colour colourS = UTILS_COLOURS[i];
         if (strcmp(colourS.name, colour) == 0) {
-            for (int j = 0; j < 3; ++j) {
-                APP_BACKGROUND_COLOUR[j] = colourS.value[j];
-            }
+            APP_BACKGROUND_COLOUR = colourS;
             break;
         }
     }
